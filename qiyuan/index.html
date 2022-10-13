@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>祈愿页面</title>
+	</head>
+	<body>
+		<h1 style="text-align:center">祈愿页面</h1>
+		<p style="text-align:center"><img src="img/imgs.jpg"/></p>
+		<p style="text-align:right"><button onclick="javascript:qiyuan()" style="background-image:url('./img/button.png');height:50px;width:190px;"></button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
+        <h3 style="text-align:center"><a href="../getys/">获取更多原石</a></h3>
+		<script type="text/javascript">
+			var yuanshi = 8000;
+			function qiyuan(){
+				if(yuanshi>=0){
+				yuanshi = yuanshi - 1600;
+				var che = ["七七","刻晴","莫娜","琴","迪卢克","提纳里"]; 
+				var n = Math.floor(Math.random() * che.length + 1)-1;
+				var wea = ["黑缨枪","讨龙英杰谭","黎明神剑","反曲弓","以理服人","弹弓"];
+				var p = Math.floor(Math.random() * wea.length + 1)-1;
+				alert("祈愿结果:"+che[n]+"、"+wea[p]+"、新手长枪x8");
+				}else{
+					alert("原石不足!");
+				}
+			}
+		</script>
+	</body>
+</html>
