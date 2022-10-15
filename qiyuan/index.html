@@ -31,26 +31,23 @@
 
     <!-- 主应用 -->
     <script type="text/javascript">
+        const yuanShiDisplayPrefix = '原石数量：';
+        const resultDisplayPrefix = '祈愿结果：';
+        const wdnmd = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里"];
+        const weaponsPool = ["黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
         var yuanshi = 160 * 90;
         var yuanShiNumberDisplay = document.getElementById("numberOfYuanShi");
 
-        // 更新原石数量
-        function updateYuanShiNumber(yuanshi, removeAmount) {
-            const newYuanShiNumber = yuanshi - removeAmount;
+        yuanShiNumberDisplay.innerText = yuanShiDisplayPrefix + yuanshi;
 
-            // 更新显示内容
-            yuanShiNumberDisplay.innerText = "原石数量：" + yuanshi;
-
-            return newYuanShiNumber
-        }
         // 单抽
         function qiYuan1X() {
             if (yuanshi >= 159) {
                 yuanshi = yuanshi - 160;
-                yuanShiNumberDisplay.innerText = "原石数量:" + yuanshi;
-                var list = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里", "黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
-                var indexOfEpicCharactersList = Math.floor(Math.random() * list.length + 1) - 1;
-                alert("祈愿结果：" + list[indexOfEpicCharactersList]);
+                yuanShiNumberDisplay.innerText = yuanShiDisplayPrefix + yuanshi;
+                const currentPool = wdnmd.concat(weaponsPool);
+                const currentIndex = Math.floor(Math.random() * list.length + 1) - 1;
+                alert(resultDisplayPrefix + currentPool[currentIndex]);
             } else {
                 alert("原石不足!");
             }
@@ -58,17 +55,26 @@
 
         // 十连抽
         function qiYuan10X() {
-            if (yuanshi >= 1599) {
+            if (yuanshi == 1600) {
+                // 选你马
                 yuanshi = yuanshi - 1600;
-                yuanShiNumberDisplay.innerText = "原石数量:" + yuanshi;
-                var epicCharactersList = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里"];
-                var indexOfEpicCharactersList = Math.floor(Math.random() * epicCharactersList.length + 1) - 1;
-                var normalWeaponsList = ["黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
-                var indexOfNormalWeaponsList = Math.floor(Math.random() * normalWeaponsList.length + 1) - 1;
-                for () {
+                alert(resultDisplayPrefix + wdnmd[0] + "x10");
+            } else if (yuanshi >= 1599) {
+                yuanshi = yuanshi - 1600;
+                yuanShiNumberDisplay.innerText = yuanShiDisplayPrefix + yuanshi;
 
+                // 创建储存结果的列表
+                var resultList = [];
+
+                // 选取角色
+                resultList.push(wdnmd[Math.floor(Math.random() * wdnmd.length + 1) - 1]);
+
+                // 填充空位
+                for (i = 0; resultList.length < 10; i++) {
+                    resultList.push(weaponsPool[Math.floor(Math.random() * weaponsPool.length + 1) - 1])
                 }
-                alert("祈愿结果：" + epicCharactersList[indexOfEpicCharactersList] + "、" + normalWeaponsList[indexOfNormalWeaponsList] + "、新手长枪x8");
+
+                alert(resultDisplayPrefix + resultList);
             } else {
                 alert("原石不足!");
             }
