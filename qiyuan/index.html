@@ -1,18 +1,26 @@
 <!--代码版权归属YuxiangWang_0525© - yuxiangwang0525.com 2022 保留所有权利-->
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
     <meta charset="utf-8">
     <title>祈愿页面</title>
+    <style>
+        .qiyuan-button {
+            margin: 5px 10px;
+            height: 50px;
+            width: 190px;
+        }
+    </style>
 </head>
 
-<body style="overflow: hidden; background-image: url('img/imgs.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; background-clip: border-box; position: absolute; top: 0; left: 0; width: 90%; height: 100%;">
+<body style="overflow: hidden; background-image: url('img/imgs.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; background-clip: border-box; position: absolute; top: 0; left: 0; width: 90%; height: 100%;"
+    id="rotate">
     <span style="position: fixed; bottom:0; right:0; margin-right: 100px; margin-bottom: 50px; background-color: white; border-radius: 15px; border-width: 3px;">
-		<button onclick="javascript:qiYuan1X()"
-			style="background-image:url('./img/button1.png');height:50px;width:190px;"></button>
+		<button onclick="javascript:qiYuan1X()" style="background-image:url('./img/button1.png');"
+			class="qiyuan-button"></button>
 		<button onclick="javascript:qiYuan10X()"
-			style="background-image:url('./img/button.png');height:50px;width:190px;"></button>
+			style="background-image:url('./img/button.png');height:50px;width:190px;" class="qiyuan-button"></button>
 		<hr />
 		<span>
 			<img src="./img/yuanshi.png" style="height: 18px; width: auto; aspect-ratio: 1 / 1;" />
@@ -20,33 +28,47 @@
     </span>
     <a style="position: relative; float: right; text-align: right;" href="javascript:getMoreYuanShi()">获取更多原石</a>
     </span>
+
+    <!-- 主应用 -->
     <script type="text/javascript">
         var yuanshi = 160 * 90;
         var yuanShiNumberDisplay = document.getElementById("numberOfYuanShi");
-        yuanShiNumberDisplay.innerText = "原石数量:" + yuanshi;
 
-        // 单次祈愿
+        // 更新原石数量
+        function updateYuanShiNumber(yuanshi, removeAmount) {
+            const newYuanShiNumber = yuanshi - removeAmount;
+
+            // 更新显示内容
+            yuanShiNumberDisplay.innerText = "原石数量：" + yuanshi;
+
+            return newYuanShiNumber
+        }
+        // 单抽
         function qiYuan1X() {
             if (yuanshi >= 159) {
                 yuanshi = yuanshi - 160;
                 yuanShiNumberDisplay.innerText = "原石数量:" + yuanshi;
                 var list = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里", "黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
-                var n = Math.floor(Math.random() * list.length + 1) - 1;
-                alert("祈愿结果:" + list[n]);
+                var indexOfEpicCharactersList = Math.floor(Math.random() * list.length + 1) - 1;
+                alert("祈愿结果：" + list[indexOfEpicCharactersList]);
             } else {
                 alert("原石不足!");
             }
         }
 
+        // 十连抽
         function qiYuan10X() {
             if (yuanshi >= 1599) {
                 yuanshi = yuanshi - 1600;
                 yuanShiNumberDisplay.innerText = "原石数量:" + yuanshi;
-                var che = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里"];
-                var n = Math.floor(Math.random() * che.length + 1) - 1;
-                var wea = ["黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
-                var p = Math.floor(Math.random() * wea.length + 1) - 1;
-                alert("祈愿结果:" + che[n] + "、" + wea[p] + "、新手长枪x8");
+                var epicCharactersList = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里"];
+                var indexOfEpicCharactersList = Math.floor(Math.random() * epicCharactersList.length + 1) - 1;
+                var normalWeaponsList = ["黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
+                var indexOfNormalWeaponsList = Math.floor(Math.random() * normalWeaponsList.length + 1) - 1;
+                for () {
+
+                }
+                alert("祈愿结果：" + epicCharactersList[indexOfEpicCharactersList] + "、" + normalWeaponsList[indexOfNormalWeaponsList] + "、新手长枪x8");
             } else {
                 alert("原石不足!");
             }
@@ -60,6 +82,39 @@
                 location.replace("../getys/");
             }
         }
+
+        // 不要用了，这玩意有毒
+        // const contentDOM = document.getElementById("rotate");
+        // const width = document.documentElement.clientWidth;
+        // const height = document.documentElement.clientHeight;
+        // var screen_width = width; //屏幕宽度
+        // if (width < height) {
+        //     screen_width = height; //如果 是竖屏，灵感的宽度就等于屏高
+        //     contentDOM.style.width = height + 'px';
+        //     contentDOM.style.height = width + 'px';
+        //     contentDOM.style.top = (height - width) / 2 + 'px';
+        //     contentDOM.style.left = 0 - (height - width) / 2 + 'px';
+        //     contentDOM.style.transform = 'rotate(90deg)';
+        // }
+        // //根据手机旋转的角度来判断
+        // const evt = "onorientationchange" in window ? "orientationchange" : "resize"; //旋转事件
+        // window.addEventListener(evt, function() { //事件监听
+        //     if (window.orientation === 90 || window.orientation === -90) { //旋转到 90 或 -90 度，即竖屏到横屏
+        //         screen_width = height; //横屏，灵感的宽度就等于屏高
+        //         contentDOM.style.width = height + 'px';
+        //         contentDOM.style.height = width + 'px';
+        //         contentDOM.style.top = '0px';
+        //         contentDOM.style.left = '0px';
+        //         contentDOM.style.transform = 'none'; //不旋转；
+        //     } else { //旋转到 180 或 0 度，即横屏到竖屏
+        //         screen_width = height; //竖屏，灵感的宽度就等于屏高
+        //         contentDOM.style.width = height + 'px';
+        //         contentDOM.style.height = width + 'px';
+        //         contentDOM.style.top = (height - width) / 2 + 'px';
+        //         contentDOM.style.left = 0 - (height - width) / 2 + 'px';
+        //         contentDOM.style.transform = 'rotate(90deg)'; //旋转90度
+        //     }
+        // }, false);
     </script>
 </body>
 
