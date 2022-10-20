@@ -1,52 +1,127 @@
 <!--代码版权归属YuxiangWang_0525© - yuxiangwang0525.com 2022 保留所有权利-->
 <!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>祈愿页面</title>
-	</head>
-	<body>
-		<h1 style="text-align:center">祈愿页面</h1>
-		<p style="text-align:center"><img src="./img/yuanshi.png" style="width:1.5%;height:1.5%;object-fit: fill;object-fit: contain;object-fit: scale-down;" /><p id="ysn" style="text-align:center">原石数量显示失败,请开启您的JavaScript后再体验</p></p>
-		<p style="text-align:center"><img src="img/imgs.jpg"/></p>
-		<p style="text-align:right"><button onclick="javascript:qiyuan1()" style="background-image:url('./img/button1.png');height:50px;width:190px;"></button><button onclick="javascript:qiyuan10()" style="background-image:url('./img/button.png');height:50px;width:190px;"></button>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</p>
-        <h3 style="text-align:center"><a href="javascript:linkgoter()">获取更多原石</a></h3>
-		<script type="text/javascript">
-			var yuanshi = 8000;
-			var ysndisplay = document.getElementById("ysn");
-			ysndisplay.innerText= "原石数量:"+yuanshi;
-			function qiyuan1(){
-				if(yuanshi>=159){
-				yuanshi = yuanshi - 160;
-				ysndisplay.innerText= "原石数量:"+yuanshi;
-				var list = ["七七","刻晴","莫娜","琴","迪卢克","提纳里","黑缨枪","讨龙英杰谭","黎明神剑","反曲弓","以理服人","弹弓"]; 
-				var n = Math.floor(Math.random() * list.length + 1)-1;
-				alert("祈愿结果:"+list[n]);
-				}else{
-					alert("原石不足!");
-				}
-			}
-			function qiyuan10(){
-				if(yuanshi>=1599){
-				yuanshi = yuanshi - 1600;
-				ysndisplay.innerText= "原石数量:"+yuanshi;
-				var che = ["七七","刻晴","莫娜","琴","迪卢克","提纳里"]; 
-				var n = Math.floor(Math.random() * che.length + 1)-1;
-				var wea = ["黑缨枪","讨龙英杰谭","黎明神剑","反曲弓","以理服人","弹弓"];
-				var p = Math.floor(Math.random() * wea.length + 1)-1;
-				alert("祈愿结果:"+che[n]+"、"+wea[p]+"、新手长枪x8");
-				}else{
-					alert("原石不足!");
-				}
+<html lang="zh">
 
-			}
-			function linkgoter(){
-				if(yuanshi!=0){
-					alert("请祈愿完所有原石后再来获取原石!");
-				}else{
-					location.replace("../getys/");
-				}
-			}
-		</script>
-	</body>
+<head>
+    <meta charset="utf-8">
+    <title>祈愿页面</title>
+    <style>
+        .qiyuan-button {
+            margin: 5px 10px;
+            height: 50px;
+            width: 190px;
+        }
+    </style>
+</head>
+
+<body style="overflow: hidden; background-image: url('img/imgs.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; background-clip: border-box; position: absolute; top: 0; left: 0; width: 90%; height: 100%;"
+    id="rotate">
+    <span style="position: fixed; bottom:0; right:0; margin-right: 100px; margin-bottom: 50px; background-color: white; border-radius: 15px; border-width: 3px;">
+		<button onclick="javascript:qiYuan1X()" style="background-image:url('./img/button1.png');"
+			class="qiyuan-button"></button>
+		<button onclick="javascript:qiYuan10X()"
+			style="background-image:url('./img/button.png');height:50px;width:190px;" class="qiyuan-button"></button>
+		<hr />
+		<span>
+			<img src="./img/yuanshi.png" style="height: 18px; width: auto; aspect-ratio: 1 / 1;" />
+			<span id="numberOfYuanShi" style="text-align:center">原石数量显示失败，您是否开启了JavaScript？</span>
+    </span>
+    <a style="position: relative; float: right; text-align: right;" href="javascript:getMoreYuanShi()">获取更多原石</a>
+    </span>
+
+    <!-- 主应用 -->
+    <script type="text/javascript">
+        const yuanShiDisplayPrefix = '原石数量：';
+        const resultDisplayPrefix = '祈愿结果：';
+        const wdnmd = ["七七", "刻晴", "莫娜", "琴", "迪卢克", "提纳里"];
+        const weaponsPool = ["黑缨枪", "讨龙英杰谭", "黎明神剑", "反曲弓", "以理服人", "弹弓"];
+        var yuanshi = 160 * 90;
+        var yuanShiNumberDisplay = document.getElementById("numberOfYuanShi");
+
+        yuanShiNumberDisplay.innerText = yuanShiDisplayPrefix + yuanshi;
+
+        // 单抽
+        function qiYuan1X() {
+            if (yuanshi >= 159) {
+                yuanshi = yuanshi - 160;
+                yuanShiNumberDisplay.innerText = yuanShiDisplayPrefix + yuanshi;
+                const currentPool = wdnmd.concat(weaponsPool);
+                const currentIndex = Math.floor(Math.random() * list.length + 1) - 1;
+                alert(resultDisplayPrefix + currentPool[currentIndex]);
+            } else {
+                alert("原石不足!");
+            }
+        }
+
+        // 十连抽
+        function qiYuan10X() {
+            if (yuanshi == 1600) {
+                // 选你马
+                yuanshi = yuanshi - 1600;
+                alert(resultDisplayPrefix + wdnmd[0] + "x10");
+            } else if (yuanshi >= 1599) {
+                yuanshi = yuanshi - 1600;
+                yuanShiNumberDisplay.innerText = yuanShiDisplayPrefix + yuanshi;
+
+                // 创建储存结果的列表
+                var resultList = [];
+
+                // 选取角色
+                resultList.push(wdnmd[Math.floor(Math.random() * wdnmd.length + 1) - 1]);
+
+                // 填充空位
+                for (i = 0; resultList.length < 10; i++) {
+                    resultList.push(weaponsPool[Math.floor(Math.random() * weaponsPool.length + 1) - 1])
+                }
+
+                alert(resultDisplayPrefix + resultList);
+            } else {
+                alert("原石不足!");
+            }
+
+        }
+
+        function getMoreYuanShi() {
+            if (yuanshi != 0) {
+                alert("请祈愿完所有原石后再来获取原石!");
+            } else {
+                location.replace("../getys/");
+            }
+        }
+
+        // 不要用了，这玩意有毒
+        // const contentDOM = document.getElementById("rotate");
+        // const width = document.documentElement.clientWidth;
+        // const height = document.documentElement.clientHeight;
+        // var screen_width = width; //屏幕宽度
+        // if (width < height) {
+        //     screen_width = height; //如果 是竖屏，灵感的宽度就等于屏高
+        //     contentDOM.style.width = height + 'px';
+        //     contentDOM.style.height = width + 'px';
+        //     contentDOM.style.top = (height - width) / 2 + 'px';
+        //     contentDOM.style.left = 0 - (height - width) / 2 + 'px';
+        //     contentDOM.style.transform = 'rotate(90deg)';
+        // }
+        // //根据手机旋转的角度来判断
+        // const evt = "onorientationchange" in window ? "orientationchange" : "resize"; //旋转事件
+        // window.addEventListener(evt, function() { //事件监听
+        //     if (window.orientation === 90 || window.orientation === -90) { //旋转到 90 或 -90 度，即竖屏到横屏
+        //         screen_width = height; //横屏，灵感的宽度就等于屏高
+        //         contentDOM.style.width = height + 'px';
+        //         contentDOM.style.height = width + 'px';
+        //         contentDOM.style.top = '0px';
+        //         contentDOM.style.left = '0px';
+        //         contentDOM.style.transform = 'none'; //不旋转；
+        //     } else { //旋转到 180 或 0 度，即横屏到竖屏
+        //         screen_width = height; //竖屏，灵感的宽度就等于屏高
+        //         contentDOM.style.width = height + 'px';
+        //         contentDOM.style.height = width + 'px';
+        //         contentDOM.style.top = (height - width) / 2 + 'px';
+        //         contentDOM.style.left = 0 - (height - width) / 2 + 'px';
+        //         contentDOM.style.transform = 'rotate(90deg)'; //旋转90度
+        //     }
+        // }, false);
+    </script>
+</body>
+
 </html>
